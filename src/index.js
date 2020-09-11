@@ -1,17 +1,66 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import * as serviceWorker from './serviceWorker';
+import ReactDOM from 'react-dom'
+import { createStore } from  'redux';
 
-ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
-);
+import App from "./components/app";
+import reducer from './reducer';
+import {Provider} from "react-redux";
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
-serviceWorker.unregister();
+// инициализация State;
+//const initialState = 0;
+
+const store = createStore(reducer);
+
+// const { dispatch } = store;
+
+// Пример функции обертки bindActionCreator
+// const bindActionCreator = (creator, dispatch) => (...args) => {
+//     dispatch(creator(...args));
+// }
+// const incDispatch = () => dispatch(inc());
+
+// const { inc, dec, rnd } =
+//     bindActionCreators( actions, dispatch);
+
+// функциональные кнопки до реализии на REACT
+// document
+//     .getElementById('inc')
+//     .addEventListener('click', inc);
+//
+// document
+//     .getElementById('dec')
+//     .addEventListener('click', dec);
+//
+// document
+//     .getElementById('rnd')
+//     .addEventListener('click', () => {
+//         const payload = Math.floor(Math.random()*10);
+//         rnd(payload);
+//     });
+
+// const update = () => {
+    // document
+    //     .getElementById('counter')
+    //     .innerHTML = store.getState();
+    ReactDOM.render(
+        <Provider store={store}>
+            <App />
+        </Provider> ,
+        document.getElementById("root"));
+// };
+// update();
+// store.subscribe(update);
+
+// для того чтобы получать обнолвения, мы вызываем store.subscribe()
+//store.subscribe(() => {
+// для того чтобы получить текущее состояние, мы вызываем store.getState()
+//    console.log(store.getState());
+//})
+// для того чтобы обработать кокое-либо действие, мы вызываем store.dispatch()
+//store.dispatch({type: 'INC'});
+//store.dispatch({type: 'INC'});
+
+// let state = reducer(undefined, {});
+// state = reducer(state, { type: 'INC'});
+// state = reducer(state, { type: 'INC'});
+// console.log(state);
